@@ -16,7 +16,7 @@ function App() {
           <Route path="/" exact>
             <HomePage />
           </Route>
-          <Route path="/event">
+          <Route path="/event/:slug">
             <Eventpage />
           </Route>
         </Switch>

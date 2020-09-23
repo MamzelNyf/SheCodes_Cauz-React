@@ -8,9 +8,9 @@ function Nav() {
       <Link to="/" className={"button"}>
         Home
       </Link>
-      <Link to="/event" className={"button"}>
+      {/* <Link to="/event" className={"button"}>
         Event
-      </Link>
+      </Link> */}
     </nav>
   );
 }

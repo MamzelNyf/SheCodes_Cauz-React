@@ -1,18 +1,32 @@
-import React from "react";
-import { allEvents } from "../data";
+import React, { useState, useEffect } from "react";
+// import { allEvents } from "../data";
 
 import EventCard from "../components/EventCard/EventCard";
 
 function HomePage() {
+  // variables
+  const [eventList, setEventList] = useState ([])
+
+  // methods: useEffect render when the app render, the bracket while have the condition for the useEffect to rerender when app change
+  useEffect(() => {
+    // setEventList(allEvents) use the local data
+    fetch(`${process.env.REACT_APP_API_URL}events/`)
+    .then((results) => {
+      return results.json();
+    })
+    .then((data) => {
+      setEventList(data);
+    });
+  }, []);
+
+  // template 
   return (
     <div>
       <h1>This is the HomePage</h1>
       <div id="project-list">
-        {allEvents.map((eventData, key) => {
+        {eventList.map((eventData, key) => {
           return (
-            <EventCard key={key} eventData={eventData}>
-              {eventData.title}
-            </EventCard>
+            <EventCard key={key} eventData={eventData}/>
           );
         })}
       </div>
