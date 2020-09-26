@@ -13,7 +13,7 @@ function EventPage() {
     .then((data) => {
       setEventData(data);
     });
-  }, []);
+  }, [slug]);
   return (
     <div>
       <h1>{eventData.title}</h1>

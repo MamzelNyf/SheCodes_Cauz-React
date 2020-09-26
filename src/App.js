@@ -3,12 +3,15 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Nav from "./components/Nav/Nav";
 import HomePage from "./pages/HomePage";
-import Eventpage from "./pages/EventPage";
+import EventPage from "./pages/EventPage";
+import LoginPage from "./pages/LoginPage"
+
 
 import "./App.css";
 
 function App() {
   return (
+    
     <Router>
       <div className={"App"}>
         <Nav />
@@ -17,7 +20,10 @@ function App() {
             <HomePage />
           </Route>
           <Route path="/event/:slug">
-            <Eventpage />
+            <EventPage />
+          </Route>
+          <Route path="/login">
+            <LoginPage />
           </Route>
         </Switch>
       </div>
