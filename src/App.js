@@ -3,7 +3,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 import Nav from "./components/Nav/Nav"
 import HomePage from "./pages/HomePage"
+import CreateEventPage from "./pages/PostEventPage"
 import EventPage from "./pages/EventPage"
+import LoginPage from "./pages/LoginPage"
+import SignupPage from "./pages/SignupPage"
+
 
 import "./App.css"
 
@@ -27,8 +31,17 @@ function App() {
           <Route path="/" exact>
             <HomePage />
           </Route>
-          <Route path="/event/:slug">
+          <Route path="/events/:slug" exact>
             <EventPage />
+          </Route>
+          <Route path="/events/" exact>
+            <CreateEventPage />
+          </Route>
+          <Route path="/signup">
+            <SignupPage  setUsername={setUsername} />
+          </Route>
+          <Route path="/login">
+            <LoginPage setUsername={setUsername}/>
           </Route>
         </Switch>
       </div>

@@ -2,11 +2,11 @@ import React from 'react';
 
 import LoginForm from "../components/LoginForm/LoginForm"
 
-function LoginPage(){
+function LoginPage({setUsername}){
     return (
     <div>
         <h1>This is login Page</h1>
-        <LoginForm />
+        <LoginForm setUsername={setUsername} />
     </div>
     )
 }

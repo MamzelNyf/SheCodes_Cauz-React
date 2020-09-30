@@ -1,10 +1,14 @@
 import React, { useState } from "react"
+import {useHistory} from "react-router-dom"
+
 
 function LoginForm({ setUsername }) {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   })
+  const history = useHistory();
+
 
   //update the variable credentials when entering data in the input
   const handleChange = (e) => {
@@ -52,6 +56,7 @@ function LoginForm({ setUsername }) {
     if (credentials.username && credentials.password) {
       const token = await fetchToken()
       await saveUsername(token)
+      history.push("/");
     }
   }
 

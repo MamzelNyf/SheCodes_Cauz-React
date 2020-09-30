@@ -1,14 +1,15 @@
-import React, { useState } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
-import LoginForm from "../LoginForm/LoginForm"
+// import LoginForm from "../LoginForm/LoginForm"
+// import SignupForm from "../SignupForm/SignupForm"
 
 import "./Nav.css"
 
 //internal components used in the main component Nav= cleaner  
 //Uses the props setUsername passed in Nav by App
 const LogoutButton = ({ setUsername }) => (
-  <button
+  <Link className={"button"} to="/"
     onClick={() => {
       localStorage.removeItem("token")
       localStorage.removeItem("username")
@@ -16,21 +17,19 @@ const LogoutButton = ({ setUsername }) => (
     }}
   >
     Logout
-  </button>
+  </Link>
 )
 
-const LoggedOutNav = ({ setUsername }) => {
-  const [state, setState] = useState(null)
+const LoggedOutNav = () => {
 
   return (
     <div>
-      <div>
-        {/* if the state store already login or signup, set it to null to create a toogle button */}
-        <button onClick={() => setState(state ? null : "login")}>Login</button>
-        <button onClick={() => setState(state ? null : "signup")}>Signup</button>
-      </div>
-      {state === "login" ? <LoginForm setUsername={setUsername} /> : null}
-      {state === "signup" ? "Signup!" : null}
+      <Link to="/login" className={"button"}>
+        Login
+      </Link>
+      <Link to="/signup" className={"button"}>
+        Signup
+      </Link>
     </div>
   )
 }
@@ -43,9 +42,14 @@ function Nav({ loggedIn, setUsername }) {
       </Link>
       {/* if loggedIn is true, pass the prop setUsername from App.js to the internal component*/}
       {loggedIn ? (
-        <LogoutButton setUsername={setUsername} />
+        <>
+          <LogoutButton setUsername={setUsername} />
+          <Link to="/events/" className="button">
+            Create a new Event
+          </Link>
+        </>
       ) : (
-        <LoggedOutNav setUsername={setUsername} />
+          <LoggedOutNav setUsername={setUsername} />
       )}
     </div>
   )
