@@ -1,14 +1,12 @@
 import React, { useState } from "react"
-import {useHistory} from "react-router-dom"
-
+import { useHistory } from "react-router-dom"
 
 function LoginForm({ setUsername }) {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   })
-  const history = useHistory();
-
+  const history = useHistory()
 
   //update the variable credentials when entering data in the input
   const handleChange = (e) => {
@@ -30,9 +28,9 @@ function LoginForm({ setUsername }) {
     window.localStorage.setItem("username", data.username)
     setUsername(data.username)
   }
-// getting the token is related to login so good practice to associate it to the login component
-// send the credentials to the api-token-auth to get a token back
-// save token in localstorage and return the token
+  // getting the token is related to login so good practice to associate it to the login component
+  // send the credentials to the api-token-auth to get a token back
+  // save token in localstorage and return the token
   const fetchToken = async () => {
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}api-token-auth/`,
@@ -45,18 +43,24 @@ function LoginForm({ setUsername }) {
       }
     )
     const data = await response.json()
-    window.localStorage.setItem("token", data.token)
-    return data.token
+    if (data.token !== undefined) {
+      window.localStorage.setItem("token", data.token)
+      history.push("/")
+      return data.token
+    } else {
+      alert("wrong username/password")
+    }
   }
-//when form subimtted, save credentials and create a const token with return of fetchToken function
-// pass token to saveUsername function
+  //when form subimtted, save credentials and create a const token with return of fetchToken function
+  // pass token to saveUsername function
   const handleLogin = async (e) => {
     //prevent the default behavior of the button
     e.preventDefault()
     if (credentials.username && credentials.password) {
       const token = await fetchToken()
-      await saveUsername(token)
-      history.push("/");
+      if (token !== undefined) {
+        await saveUsername(token)
+      }
     }
   }
 

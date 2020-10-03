@@ -1,17 +1,17 @@
 import React, { useState } from "react"
-import {useHistory} from "react-router-dom"
-
+import { useHistory } from "react-router-dom"
 
 function SignupForm() {
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
     password: "",
+    checkPassword: "",
   })
 
-  const history = useHistory();
+  const history = useHistory()
 
-// update the variable credentials when entering data in the input
+  // update the variable credentials when entering data in the input
   const handleChange = (e) => {
     const { id, value } = e.target
     setCredentials((prevCredentials) => ({
@@ -19,27 +19,21 @@ function SignupForm() {
       [id]: value,
     }))
   }
-  const signup = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_API_URL}users/`,
-      {
+  const handleSignup = async () => {
+    if (credentials.password !== credentials.checkPassword) {
+      alert("Passwords don't match")
+    } else {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}users/`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(credentials),
-      }
-    )
-    const data = await response.json()
-    return data
-  }
+      })
 
-  const handleSignup = async (e) => {
-    //prevent the default behavior of the button
-    e.preventDefault()
-    if (credentials.username && credentials.email && credentials.password) {
-      const token = await signup()
-      history.push("/");
+      const data = await response.json()
+      history.push("/")
+      return data
     }
   }
 
@@ -51,7 +45,7 @@ function SignupForm() {
         <input
           type="text"
           id="username"
-          placeholder="Enter username"
+          placeholder="Enter a username"
           onChange={handleChange}
           value={credentials.username}
         />
@@ -61,7 +55,7 @@ function SignupForm() {
         <input
           type="email"
           id="email"
-          placeholder="Enter email"
+          placeholder="Enter your email"
           onChange={handleChange}
           value={credentials.email}
         />
@@ -71,7 +65,7 @@ function SignupForm() {
         <input
           type="password"
           id="password"
-          placeholder="Enter password"
+          placeholder="Enter a password"
           onChange={handleChange}
           value={credentials.password}
         />
@@ -80,10 +74,10 @@ function SignupForm() {
         <label htmlFor="password">Password:</label>
         <input
           type="password"
-          id="password2"
-          placeholder="Enter password"
+          id="checkPassword"
+          placeholder="Please enter your password again"
           onChange={handleChange}
-          value={credentials.password}
+          value={credentials.checkPassword}
         />
       </div>
       <button type="submit">Submit</button>
