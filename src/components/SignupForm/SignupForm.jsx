@@ -19,21 +19,26 @@ function SignupForm() {
       [id]: value,
     }))
   }
-  const handleSignup = async () => {
+  const handleSignup = async (event) => {
+    event.preventDefault()
     if (credentials.password !== credentials.checkPassword) {
       alert("Passwords don't match")
     } else {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}users/`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
-      })
-
-      const data = await response.json()
-      history.push("/")
-      return data
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}users/`, {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(credentials),
+        })
+  
+        const data = await response.json()
+        history.push("/")
+        return data
+      } catch (error) {
+        alert("Network error", error.message)
+      }
     }
   }
 

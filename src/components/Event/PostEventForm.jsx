@@ -26,9 +26,7 @@ function PostEventForm() {
     }))
   }
   const postData = async () => {
-    console.log(credentials)
-    console.log(token)
-
+    try{
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}events/`,
       {
@@ -41,13 +39,17 @@ function PostEventForm() {
       }
     )
     const data = await response.json()
-    history.push(`/events/:${data.slug}`)
+    history.push(`/events/${data.slug}`)
     return data
-  }
 
-  const handlePostEvent = async (e) => {
-    //prevent the default behavior of the button
-    e.preventDefault()
+  }catch (error) {
+        alert("Network error", error.message)
+  }
+}
+
+  const handlePostEvent = async (event) => {
+    //prevent the default behavior of the form which is rerendering
+    event.preventDefault()
       await postData(token)
   }
   
@@ -56,7 +58,7 @@ function PostEventForm() {
     <form onSubmit={handlePostEvent}>
       <div>
         {/* htmlFor is the React notation for used for accessibility */}
-        <label htmlFor="title">Title:</label>
+        <label htmlFor="title">Title of your event: </label>
         <input
           type="text"
           id="title"
@@ -67,7 +69,7 @@ function PostEventForm() {
       </div>
 
       <div>
-        <label htmlFor="description">description:</label>
+        <label htmlFor="description">Description of your event: </label>
         <input
           type="description"
           id="description"
@@ -77,7 +79,7 @@ function PostEventForm() {
         />
       </div>
       <div>
-        <label htmlFor="goal">goal:</label>
+        <label htmlFor="goal">Goal you want to reach: </label>
         <input
           type="goal"
           id="goal"
@@ -87,13 +89,24 @@ function PostEventForm() {
         />
       </div>
       <div>
-        <label htmlFor="image">image:</label>
+        <label htmlFor="image">Picture for your event: </label>
         <input
           type="image"
           id="goal"
           placeholder="Enter image"
           onChange={handleChange}
           value={credentials.image}
+          alt="Eventpicture"
+        />
+      </div>
+      <div>
+        <label htmlFor="category">Category: </label>
+        <input
+          type="image"
+          id="goal"
+          placeholder="Enter image"
+          onChange={handleChange}
+          value={credentials.category}
           alt="Eventpicture"
         />
       </div>

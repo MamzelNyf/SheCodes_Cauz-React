@@ -32,23 +32,27 @@ function LoginForm({ setUsername }) {
   // send the credentials to the api-token-auth to get a token back
   // save token in localstorage and return the token
   const fetchToken = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_API_URL}api-token-auth/`,
-      {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}api-token-auth/`,
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(credentials),
+        }
+      )
+      const data = await response.json()
+      if (data.token !== undefined) {
+        window.localStorage.setItem("token", data.token)
+        history.push("/")
+        return data.token
+      } else {
+        alert("wrong username/password")
       }
-    )
-    const data = await response.json()
-    if (data.token !== undefined) {
-      window.localStorage.setItem("token", data.token)
-      history.push("/")
-      return data.token
-    } else {
-      alert("wrong username/password")
+    } catch (error) {
+      alert("Network error", error.message)
     }
   }
   //when form subimtted, save credentials and create a const token with return of fetchToken function

@@ -31,9 +31,11 @@ function EventPage() {
   return (
     <div>
       <h1>{eventData.title}</h1>
+      <p>Category {eventData.category}</p>
       <img src={eventData.image} alt="event" />
-      <h3>Created on the : {formatDate(eventData.date_created)}</h3>
+      <h3>Created on {formatDate(eventData.date_created)}</h3>
       <h3>{`Active:  ${eventData.is_open}`}</h3>
+      <h3>Take place in {eventData.region}</h3>
       <h3>Pledges:</h3>
       <ul>
         {eventData.pledges.map((pledgeData, key) => {
