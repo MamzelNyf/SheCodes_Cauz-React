@@ -1,0 +1,63 @@
+.dd-wrapper{
+    position: relative;
+    width: 222px;
+    font-size: 1.6rem;
+    user-select: none;
+}
+
+.dd-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    border: 1px solid rgb(223, 223, 223);
+    border-radius: 3px;
+    background-color: white;
+    line-height: 38px;
+    cursor: default;
+    cursor: pointer;
+}
+.dd-header span {
+    margin-right: 20px;
+}
+.dd-header-title{
+    margin: 2px 20px;
+    margin-right: 30px;
+    font-weight: 300;
+}
+
+.dd-list{
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    max-height: 215px;
+    border: 1px solid rgb(223, 223, 223);
+    border-top: none;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    box-shadow: 0 2px 5px -1px rgb(232, 232, 232);
+    background-color: white;
+    font-weight: 700;
+    text-align: left;
+}
+
+.dd-list-item{
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 1.5rem;
+    line-height: 1.6rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: default;
+    cursor: pointer;
+}
+.dd-list-item .selected{
+    background-color: #FFCC01;
+    color: white;
+}
+.dd-list-item:hover{
+    background-color: #FFCC01;
+    color: white;
+}

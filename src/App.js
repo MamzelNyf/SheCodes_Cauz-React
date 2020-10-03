@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom"
 
 import Nav from "./components/Nav/Nav"
 import HomePage from "./pages/HomePage"
@@ -18,8 +18,7 @@ function App() {
   //check with !== null whether username is strictly not null, 
   //so if username is undefined or an empty string then it’ll be true
   const loggedIn = username !== null
-
-  console.log({ loggedIn })
+  //console.log({ loggedIn })
 
   return (
     <Router>
@@ -37,12 +36,16 @@ function App() {
           <Route path="/events/" exact>
             <CreateEventPage />
           </Route>
-          <Route path="/signup">
-            <SignupPage  setUsername={setUsername} />
-          </Route>
-          <Route path="/login">
-            <LoginPage setUsername={setUsername}/>
-          </Route>
+            <Route path="/signup">
+            {loggedIn ? <Redirect to="/" /> :
+              <SignupPage  setUsername={setUsername} />
+            }
+            </Route>
+            <Route path="/login">
+            {loggedIn ? <Redirect to="/" /> :
+              <LoginPage setUsername={setUsername}/>
+            }
+            </Route>
         </Switch>
       </div>
     </Router>

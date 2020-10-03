@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 
 function EventPage() {
-  const [eventData, setEventData] = useState({ pledges: [] })
+  // with { pledges []} load data from the related field
+  // add loading: true to create a tempory state which will be erase 
+  // when the data is loaded because ther is no loading field
+  const [eventData, setEventData] = useState({ pledges: [], loading: true })
   const { slug } = useParams()
 
   useEffect(() => {
@@ -17,7 +20,6 @@ function EventPage() {
   }, [slug])
 
   const formatDate = (date) => {
-    if (date) {
       const options = {
         weekday: "long",
         year: "numeric",
@@ -25,7 +27,11 @@ function EventPage() {
         day: "numeric",
       }
       return new Date(date).toLocaleDateString([], options)
-    }
+  }
+// while the data is loading, return  Loading instead of the eventData
+// make it pretty!
+  if (eventData.loading) {
+    return 'Loading!'
   }
 
   return (

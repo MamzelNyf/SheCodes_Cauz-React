@@ -34,7 +34,7 @@ function SignupForm() {
         })
   
         const data = await response.json()
-        history.push("/")
+        history.push("/login")
         return data
       } catch (error) {
         alert("Network error", error.message)

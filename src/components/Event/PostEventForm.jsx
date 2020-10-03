@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useEffect} from "react"
 import {useHistory} from "react-router-dom"
+import Dropdown from "../Dropdown/Dropdown"
 
 
 function PostEventForm() {
@@ -13,11 +14,48 @@ function PostEventForm() {
     category: "Charity",
     region: "World",
   })
+  const [hasError, setErrors] = useState(false);
+  const [categories, setCategories] = useState([])
+  const [regions, setRegions] = useState([])
 
   const history = useHistory();
   const token = window.localStorage.getItem("token")
 
-// update the variable credentials when entering data in the input
+  // useEffect function to get the DATA from 2 different endpiints
+  // because use async await no need to use promise .then .catch
+  // adding [] at the end of the useEffect avoid looping
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const r = await fetch(`${process.env.REACT_APP_API_URL}categories/`);
+        const categories = await r.json()
+        setCategories(categories)
+      } catch (error) {
+        setErrors(error)
+      }
+    }
+    async function fetchRegions() {
+      try {
+        const r = await fetch(`${process.env.REACT_APP_API_URL}regions/`);
+        const regions = await r.json()
+        setRegions(regions)
+      } catch (error) {
+        setErrors(error)
+      }
+      
+    }
+    // Promise allows to run 2 functions in parallel
+    Promise.all([
+      fetchCategories(),
+      fetchRegions()
+    ])
+  },[]);
+  
+  console.log({categories})
+  console.log({regions})
+
+
+  // update the variable credentials when entering data in the input
   const handleChange = (e) => {
     const { id, value } = e.target
     setCredentials((prevCredentials) => ({
@@ -25,6 +63,7 @@ function PostEventForm() {
       [id]: value,
     }))
   }
+  // when form submitted postdata 
   const postData = async () => {
     try{
     const response = await fetch(
@@ -56,6 +95,7 @@ function PostEventForm() {
 
   return (
     <form onSubmit={handlePostEvent}>
+    <span>Has error: {JSON.stringify(hasError)}</span>
       <div>
         {/* htmlFor is the React notation for used for accessibility */}
         <label htmlFor="title">Title of your event: </label>
@@ -100,15 +140,14 @@ function PostEventForm() {
         />
       </div>
       <div>
-        <label htmlFor="category">Category: </label>
-        <input
-          type="image"
-          id="goal"
-          placeholder="Enter image"
-          onChange={handleChange}
-          value={credentials.category}
-          alt="Eventpicture"
+        <Dropdown
+          title="Select category"
+          data={[{title: 'title', id: 1}]}
+          //list={credentials.category}
+          //onChange={handleChange}
+          //value={credentials.category} 
         />
+
       </div>
       <button type="submit">Submit</button>
     </form>
