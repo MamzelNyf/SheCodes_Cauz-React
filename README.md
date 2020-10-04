@@ -1,7 +1,9 @@
 # SheCodes_Cauz-React
 
 This app is a project for SheCodes Program Plus 2020.
+
 This is the front-end part.
+
 Deployed on: https://shecodes-cauz-react.herokuapp.com/ 
 
 Goal: Create a crowfunding website.
