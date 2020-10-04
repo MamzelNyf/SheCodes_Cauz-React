@@ -5,8 +5,9 @@ function EventPage() {
   // with { pledges []} load data from the related field
   // add loading: true to create a tempory state which will be erase 
   // when the data is loaded because ther is no loading field
-  const [eventData, setEventData] = useState({ pledges: [], loading: true })
+  const [eventData, setEventData] = useState({ pledges: [], loading: true})
   const { slug } = useParams()
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,11 +45,12 @@ function EventPage() {
       <h3>Take place in {eventData.region}</h3>
       <h3>Pledges:</h3>
       <ul>
-        {eventData.pledges.map((pledgeData, key) => {
+        
+        {eventData.pledges.map((pledgeData) => {
           return (
-            <li>
+            <div key={pledgeData.id}>
               ${pledgeData.amount} from {pledgeData.supporter}
-            </li>
+            </div>
           )
         })}
       </ul>

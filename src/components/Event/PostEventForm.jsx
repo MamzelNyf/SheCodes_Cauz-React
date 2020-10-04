@@ -1,20 +1,21 @@
 import React, { useState, useEffect} from "react"
 import {useHistory} from "react-router-dom"
+import DatePicker from 'react-date-picker'
 import Dropdown from "../Dropdown/Dropdown"
 
 
 function PostEventForm() {
   const [credentials, setCredentials] = useState({
-    title: "",
+    title:"",
     description: "Super NFP Event",
     goal: 5000,
     image: "http://lorempixel.com/400/400/nightlife/",
+    date_created:(new Date()),
     is_open: true,
-    date_created: "2020-09-09T20:31:00Z",
-    category: "Charity",
     region: "World",
-  })
-  const [hasError, setErrors] = useState(false);
+    categories:"",
+    regions: ""})
+  const [hasError, setErrors] = useState(false)
   const [categories, setCategories] = useState([])
   const [regions, setRegions] = useState([])
 
@@ -63,6 +64,15 @@ function PostEventForm() {
       [id]: value,
     }))
   }
+  const handleDate = (event) => {
+    event.preventDefault()
+    setCredentials(credentials.date_created)
+  }
+
+  const handleDropDown = (cat) => {
+    setCredentials(credentials.categories);
+    console.log(cat)
+  }
   // when form submitted postdata 
   const postData = async () => {
     try{
@@ -78,13 +88,13 @@ function PostEventForm() {
       }
     )
     const data = await response.json()
-    history.push(`/events/${data.slug}`)
+    history.replace(`/events/${credentials.slug}`)
     return data
 
-  }catch (error) {
-        alert("Network error", error.message)
+    }catch (error) {
+          alert("Network error", error.message)
+    }
   }
-}
 
   const handlePostEvent = async (event) => {
     //prevent the default behavior of the form which is rerendering
@@ -93,9 +103,10 @@ function PostEventForm() {
   }
   
 
+
   return (
     <form onSubmit={handlePostEvent}>
-    <span>Has error: {JSON.stringify(hasError)}</span>
+    {hasError? <span>Has error: {JSON.stringify(hasError)}</span> : null }
       <div>
         {/* htmlFor is the React notation for used for accessibility */}
         <label htmlFor="title">Title of your event: </label>
@@ -107,7 +118,10 @@ function PostEventForm() {
           value={credentials.title}
         />
       </div>
-
+      <DatePicker
+        onChange={handleDate}
+        value={credentials.date_created}
+      />
       <div>
         <label htmlFor="description">Description of your event: </label>
         <input
@@ -141,8 +155,9 @@ function PostEventForm() {
       </div>
       <div>
         <Dropdown
-          title="Select category"
-          data={[{title: 'title', id: 1}]}
+          title="Select a category"
+          data={categories}
+          onChange={handleDropDown}
           //list={credentials.category}
           //onChange={handleChange}
           //value={credentials.category} 
