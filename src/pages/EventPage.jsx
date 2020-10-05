@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
+import AddPledgeForm from '../components/PledgeForm/AddPledgeForm'
+import { formatDate } from '../helpers'
 
 function EventPage() {
   // with { pledges []} load data from the related field
@@ -20,15 +22,7 @@ function EventPage() {
     fetchData()
   }, [slug])
 
-  const formatDate = (date) => {
-      const options = {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }
-      return new Date(date).toLocaleDateString([], options)
-  }
+  
 // while the data is loading, return  Loading instead of the eventData
 // make it pretty!
   if (eventData.loading) {
@@ -43,9 +37,10 @@ function EventPage() {
       <h3>Created on {formatDate(eventData.date_created)}</h3>
       <h3>{`Active:  ${eventData.is_open}`}</h3>
       <h3>Take place in {eventData.region}</h3>
+      { !eventData.pledges   ? (
+        <>
       <h3>Pledges:</h3>
       <ul>
-        
         {eventData.pledges.map((pledgeData) => {
           return (
             <div key={pledgeData.id}>
@@ -55,6 +50,9 @@ function EventPage() {
         })}
       </ul>
       <p> Total of :</p>
+      </>)
+    : 
+    <AddPledgeForm /> }
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from "react"
 import {useHistory} from "react-router-dom"
 import DatePicker from 'react-date-picker'
+import {string_to_slug} from '../../helpers'
 import Dropdown from "../Dropdown/Dropdown"
 
 
@@ -21,6 +22,7 @@ function PostEventForm() {
 
   const history = useHistory();
   const token = window.localStorage.getItem("token")
+  const titleToSlug = string_to_slug(credentials.title)
 
   // useEffect function to get the DATA from 2 different endpiints
   // because use async await no need to use promise .then .catch
@@ -64,9 +66,9 @@ function PostEventForm() {
       [id]: value,
     }))
   }
-  const handleDate = (event) => {
-    event.preventDefault()
-    setCredentials(credentials.date_created)
+  const handleDate = (date) => {
+    setCredentials({...credentials, 
+      date_created: date})
   }
 
   const handleDropDown = (cat) => {
@@ -88,7 +90,7 @@ function PostEventForm() {
       }
     )
     const data = await response.json()
-    history.replace(`/events/${credentials.slug}`)
+    history.replace(`/events/${titleToSlug}`)
     return data
 
     }catch (error) {
@@ -157,7 +159,7 @@ function PostEventForm() {
         <Dropdown
           title="Select a category"
           data={categories}
-          onChange={handleDropDown}
+          handleDropDown={handleDropDown}
           //list={credentials.category}
           //onChange={handleChange}
           //value={credentials.category} 
