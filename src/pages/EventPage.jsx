@@ -37,7 +37,7 @@ function EventPage() {
       <h3>Created on {formatDate(eventData.date_created)}</h3>
       <h3>{`Active:  ${eventData.is_open}`}</h3>
       <h3>Take place in {eventData.region}</h3>
-      { !eventData.pledges   ? (
+      { eventData.pledges   ? (
         <>
       <h3>Pledges:</h3>
       <ul>

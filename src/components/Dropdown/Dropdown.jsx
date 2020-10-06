@@ -8,16 +8,17 @@ function Dropdown({ title, data , handleDropDown}) {
 //     setListOpen(!listOpen)
 //   }
   const [dataValue, setDataValue] = useState(title)
-  handleDropDown = (event) => {
-      setDataValue(event.target.value)
+  const onChange = ( event) => {
+    setDataValue(event.target.value)
+    handleDropDown(event.target.value)
   }
 
   return (
   <div>
       <select
-          onChange={handleDropDown}
+          onChange={onChange}
           value={dataValue}>
-          <option value={title}>{title}</option>
+          <option value={title} disabled>{title} </option>
           {data.map(({ name, id }) => (
           <option key={id} value={name}>
               {name}

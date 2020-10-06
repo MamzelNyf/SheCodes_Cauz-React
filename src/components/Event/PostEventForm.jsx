@@ -54,8 +54,8 @@ function PostEventForm() {
     ])
   },[]);
   
-  console.log({categories})
-  console.log({regions})
+  // console.log({categories})
+  // console.log({regions})
 
 
   // update the variable credentials when entering data in the input
@@ -71,12 +71,14 @@ function PostEventForm() {
       date_created: date})
   }
 
-  const handleDropDown = (cat) => {
-    setCredentials(credentials.categories);
-    console.log(cat)
+  const handleDropDown = (dataValue) => {
+    setCredentials({...credentials,
+      categories: dataValue})
+      console.log(dataValue)
   }
   // when form submitted postdata 
   const postData = async () => {
+    console.log(credentials)
     try{
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}events/`,
@@ -160,9 +162,9 @@ function PostEventForm() {
           title="Select a category"
           data={categories}
           handleDropDown={handleDropDown}
+          value={credentials.category} 
           //list={credentials.category}
           //onChange={handleChange}
-          //value={credentials.category} 
         />
 
       </div>
