@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import ReactLoading from 'react-loading';
 // import { allEvents } from "../data";
 
 import EventCard from "../components/EventCard/EventCard";
 
 function HomePage() {
   // variables
-  const [eventList, setEventList] = useState ([])
+  const [eventList, setEventList] = useState ({loading: true})
 
   // methods: useEffect render when the app render, the bracket while have the condition for the useEffect to rerender when app change
   useEffect(() => {
@@ -17,7 +18,11 @@ function HomePage() {
     .then((data) => {
       setEventList(data);
     });
-  }, []);
+  }, [eventList]);
+
+  if (eventList.loading) {
+    return <ReactLoading type={"spinningBubbles"} color={"#CBCF06"} height={'20%'} width={'20%'} />
+  }
 
   // template 
   return (

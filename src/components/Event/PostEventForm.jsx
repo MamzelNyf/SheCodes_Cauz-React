@@ -8,17 +8,14 @@ import Dropdown from "../Dropdown/Dropdown"
 function PostEventForm() {
   const [credentials, setCredentials] = useState({
     title:"",
-    description: "Super NFP Event",
-    goal: 5000,
     image: "http://lorempixel.com/400/400/nightlife/",
     date_created:(new Date()),
-    is_open: true,
-    region: "World",
-    categories:"",
-    regions: ""})
+    is_open: true})
   const [hasError, setErrors] = useState(false)
   const [categories, setCategories] = useState([])
   const [regions, setRegions] = useState([])
+  const [selectedFile, setSelectedFile] = useState(null);
+
 
   const history = useHistory();
   const token = window.localStorage.getItem("token")
@@ -59,8 +56,8 @@ function PostEventForm() {
 
 
   // update the variable credentials when entering data in the input
-  const handleChange = (e) => {
-    const { id, value } = e.target
+  const handleChange = (event) => {
+    const { id, value } = event.target
     setCredentials((prevCredentials) => ({
       ...prevCredentials,
       [id]: value,
@@ -71,14 +68,18 @@ function PostEventForm() {
       date_created: date})
   }
 
-  const handleDropDown = (dataValue) => {
+  const handleDropDownCategory = (dataValue) => {
     setCredentials({...credentials,
-      categories: dataValue})
-      console.log(dataValue)
+      category: dataValue})
+      //console.log(dataValue)
+  }
+  const handleDropDownRegion = (dataValue) => {
+    setCredentials({...credentials,
+      region: dataValue})
   }
   // when form submitted postdata 
   const postData = async () => {
-    console.log(credentials)
+    // console.log(credentials)
     try{
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}events/`,
@@ -92,8 +93,13 @@ function PostEventForm() {
       }
     )
     const data = await response.json()
-    history.replace(`/events/${titleToSlug}`)
-    return data
+    if ( credentials.title !== "" && credentials.description !== "" && credentials.goal !== "" && credentials.category !== "" && credentials.region) {
+      history.replace(`/events/${titleToSlug}`)
+      return data
+    } else {
+      alert("Give us more details, all fields are required :)")
+    }
+
 
     }catch (error) {
           alert("Network error", error.message)
@@ -105,8 +111,6 @@ function PostEventForm() {
     event.preventDefault()
       await postData(token)
   }
-  
-
 
   return (
     <form onSubmit={handlePostEvent}>
@@ -119,55 +123,60 @@ function PostEventForm() {
           id="title"
           placeholder="Enter title"
           onChange={handleChange}
-          value={credentials.title}
+          value={credentials.value}
+          onFocus = {(event) => event.target.value = ""} 
         />
       </div>
+      <label htmlFor="date">date of your event: </label>
       <DatePicker
         onChange={handleDate}
         value={credentials.date_created}
       />
       <div>
         <label htmlFor="description">Description of your event: </label>
-        <input
-          type="description"
+        <textarea
           id="description"
           placeholder="Enter description"
           onChange={handleChange}
           value={credentials.description}
+          onFocus = {(event) => event.target.value = ""} 
         />
       </div>
       <div>
         <label htmlFor="goal">Goal you want to reach: </label>
         <input
-          type="goal"
+          type="number"
           id="goal"
           placeholder="Enter goal"
           onChange={handleChange}
           value={credentials.goal}
+          onFocus = {(event) => event.target.value = ""} 
         />
       </div>
       <div>
         <label htmlFor="image">Picture for your event: </label>
-        <input
-          type="image"
+        {/* <input
+          type="file"
           id="goal"
           placeholder="Enter image"
-          onChange={handleChange}
+          onChange={(event) => setSelectedFile(event.target.files[0])}
           value={credentials.image}
           alt="Eventpicture"
-        />
+        /> */}
       </div>
-      <div>
-        <Dropdown
-          title="Select a category"
-          data={categories}
-          handleDropDown={handleDropDown}
-          value={credentials.category} 
-          //list={credentials.category}
-          //onChange={handleChange}
-        />
+      <Dropdown
+        title="Select a category"
+        data={categories}
+        handleDropDown={handleDropDownCategory}
+        value={credentials.category} 
+      />
+      <Dropdown
+        title="Select a region"
+        data={regions}
+        handleDropDown={handleDropDownRegion}
+        value={credentials.region} 
+      />
 
-      </div>
       <button type="submit">Submit</button>
     </form>
   )

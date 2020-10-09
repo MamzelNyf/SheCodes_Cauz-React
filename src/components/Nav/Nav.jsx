@@ -1,15 +1,15 @@
-import React from "react"
+import React, {useState} from "react"
 import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
-// import LoginForm from "../LoginForm/LoginForm"
-// import SignupForm from "../SignupForm/SignupForm"
+import { ArrowDownCircle, ArrowUpCircle } from "react-feather"
+
 
 import "./Nav.css"
 
 //internal components used in the main component Nav= cleaner  
 //Uses the props setUsername passed in Nav by App
 const LogoutButton = ({ setUsername }) => (
-  <Link className={"button"} to="/"
+  <Link className={"navbar-link"} to="/"
     onClick={() => {
       localStorage.removeItem("token")
       localStorage.removeItem("username")
@@ -24,10 +24,10 @@ const LoggedOutNav = () => {
 
   return (
     <div>
-      <Link to="/login" className={"button"}>
+      <Link to="/login" className={"navbar-link"}>
         Login
       </Link>
-      <Link to="/signup" className={"button"}>
+      <Link to="/signup" className={"navbar-link"}>
         Signup
       </Link>
     </div>
@@ -35,23 +35,39 @@ const LoggedOutNav = () => {
 }
 
 function Nav({ loggedIn, setUsername }) {
+  const [opened,setOpened] = useState(false)
+  const toggle = () => {
+    setOpened(!opened)
+  }
   return (
-    <div>
-      <Link to="/" className="button">
-        Home
-      </Link>
-      {/* if loggedIn is true, pass the prop setUsername from App.js to the internal component*/}
-      {loggedIn ? (
-        <>
-          <LogoutButton setUsername={setUsername} />
-          <Link to="/events/" className="button">
-            Create a new Event
-          </Link>
-        </>
-      ) : (
-          <LoggedOutNav setUsername={setUsername} />
-      )}
-    </div>
+    <nav className="navbar">
+        <div className="navbar-home">
+          <a href="/">
+            <img
+              className="logo"
+              src="../logo512.png"
+              alt="Cauz logo"
+            />
+          </a>
+          <button className="toggle" onClick={toggle}>
+            {opened ? <ArrowUpCircle /> : <ArrowDownCircle />}
+          </button>
+        </div>
+        <div className={ `navbar-links ${opened ? `opened` : `closed`}`}>
+          <Link to="/" className="navbar-link">Home</Link>
+          {/* if loggedIn is true, pass the prop setUsername from App.js to the internal component*/}
+          {loggedIn ? (
+            <>
+              <LogoutButton setUsername={setUsername} />
+              <Link to="/events/" className="navbar-link">
+                Create a new Event
+              </Link>
+            </>
+          ) : (
+              <LoggedOutNav setUsername={setUsername} />
+          )}
+      </div>
+    </nav>
   )
 }
 

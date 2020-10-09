@@ -79,6 +79,7 @@ function LoginForm({ setUsername }) {
           placeholder="Enter username"
           onChange={handleChange}
           value={credentials.username}
+          onFocus = {(event) => event.target.value = ""} 
         />
       </div>
       <div>
@@ -89,6 +90,7 @@ function LoginForm({ setUsername }) {
           placeholder="Enter password"
           onChange={handleChange}
           value={credentials.password}
+          onFocus = {(event) => event.target.value = ""} 
         />
       </div>
       <button type="submit">Login</button>

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import PostEventForm from "../components/Event/PostEventForm"
 
 function PostEventPage({setUsername}){

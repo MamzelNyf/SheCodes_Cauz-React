@@ -1,8 +1,81 @@
-.button {
-  padding: 10px;
-  margin: 10px;
-  background-color: rgba(140, 240, 240, 0.466);
-  border-radius: 5px;
-  color: black;
-  text-decoration: none;
+
+
+.logo {
+  width: 150px;
+}
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column; 
+  background-color: white;
+}
+
+.navbar-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-links.closed {
+  display: none;
+}
+
+.toggle {
+  display: block;
+}
+
+.navbar-link {
+  border-bottom: none;
+}
+
+/**
+*
+* Smaller screen + Mobile
+*
+*/
+@media screen and (min-width: 600px) {
+  .Navbar {
+    flex-direction: row; 
+    justify-content: space-between;
+    /* by default: align-items: strech -> child elements' heights = the container's height */
+  
+    height: 100vh; /* set a fixed height */
+    background-color: white;
+  }
+  
+  .navbar-links {
+    flex-direction: row;
+
+    /* align-items: stretch; by default */
+  }
+  
+  .navbar-home,
+  .navbar-link {
+    display: flex;
+    align-items: center; /* we want children to be centered vertically*/
+  
+    padding: 16px; /* with paddings on the sides */
+  }
+  
+  .navbar-home {
+    height: var(--height-lg-screens); /* it needs to stay inside the nav bar */
+    box-sizing: border-box;
+  }
+  
+  .navbar-link {
+    border-bottom: 2px solid black;
+  }
+  
+  .navbar-link:hover {
+    border-bottom-color: yellow;
+  }
+  
+  .toggle {
+    display: none;
+    padding: 8px;
+    font-size: 16px;
+  }
+  .navbar-links.closed {
+    display: initial;
+  }
+  
 }
