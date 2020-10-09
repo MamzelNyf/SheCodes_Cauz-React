@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
-import { useHistory } from "react-router-dom"
 
 import ReactLoading from 'react-loading';
 import AddPledgeForm from '../components/PledgeForm/AddPledgeForm'
@@ -62,14 +61,13 @@ function EventPage() {
               Authorization: `token ${token}`,
             }
           });       
-          // history.go(0)
       } catch (error) {
         alert("Network error", error.message)
       }
     }
 // while the data is loading, return  Loading instead of the eventData
   if (eventData.loading) {
-    return <ReactLoading type={"spinningBubbles"} color={"#CBCF06"} height={'20%'} width={'20%'} />
+    return <ReactLoading type={"spinningBubbles"} color={"#CBCF06"} className="spinner" />
   }
   const EditOptions = () => {
     return (

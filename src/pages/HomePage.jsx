@@ -21,7 +21,7 @@ function HomePage() {
   }, [eventList]);
 
   if (eventList.loading) {
-    return <ReactLoading type={"spinningBubbles"} color={"#CBCF06"} height={'20%'} width={'20%'} />
+    return <ReactLoading className="spinner" type={"spinningBubbles"} color={"#CBCF06"}  />
   }
 
   // template 

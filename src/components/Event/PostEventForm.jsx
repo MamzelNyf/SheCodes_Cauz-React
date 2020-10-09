@@ -3,18 +3,18 @@ import {useHistory} from "react-router-dom"
 import DatePicker from 'react-date-picker'
 import {string_to_slug} from '../../helpers'
 import Dropdown from "../Dropdown/Dropdown"
+// import FileUploader from "../FileUploader/FileUploader"
 
 
 function PostEventForm() {
   const [credentials, setCredentials] = useState({
     title:"",
-    image: "http://lorempixel.com/400/400/nightlife/",
     date_created:(new Date()),
     is_open: true})
   const [hasError, setErrors] = useState(false)
   const [categories, setCategories] = useState([])
   const [regions, setRegions] = useState([])
-  const [selectedFile, setSelectedFile] = useState(null);
+  // const [selectedFile, setSelectedFile] = useState(null);
 
 
   const history = useHistory();
@@ -112,6 +112,8 @@ function PostEventForm() {
       await postData(token)
   }
 
+
+
   return (
     <form onSubmit={handlePostEvent}>
     {hasError? <span>Has error: {JSON.stringify(hasError)}</span> : null }
@@ -154,14 +156,18 @@ function PostEventForm() {
         />
       </div>
       <div>
-        <label htmlFor="image">Picture for your event: </label>
-        {/* <input
-          type="file"
-          id="goal"
-          placeholder="Enter image"
-          onChange={(event) => setSelectedFile(event.target.files[0])}
+        <label htmlFor="image">Choose a picture online for your event: </label>
+        <input
+          type="text"
+          id="image"
+          placeholder="Enter the url of your image"
+          onChange={handleChange}
           value={credentials.image}
-          alt="Eventpicture"
+        />
+        {/* <FileUploader 
+          onFileSelectSuccess={(file) => setSelectedFile(file)}
+          onFileSelectError={({ error}) => alert(error)}
+          selectedFile={credentials.image}
         /> */}
       </div>
       <Dropdown

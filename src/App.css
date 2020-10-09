@@ -1,19 +1,12 @@
 .App {
   text-align: center;
   min-height: 100vh;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center; */
+  /* justify-content: center; */
   color: var(--dark);
-}
-
-#project-list {
-  display: grid;
-  grid-template-columns: 30% 30% 30%;
-  column-gap: 10px;
-  row-gap: 10px;
+  background-color: var(--light);
 }
 
 /* 1. Configuration */
@@ -24,7 +17,7 @@
   /* Main colours */
   --dark: #071013;
   --medium: #EB5160;
-  --light: #B7999C;
+  --light: rgb(255, 231, 231);
   --white: #fff ;
   --accent: #CBCF06;
   --fw-reg: 300;
@@ -44,8 +37,8 @@
 
 @media (min-width: 900px) {
   :root {
-    --fs-h1: 3em;
-    --fs-h2: 2em;
+    --fs-h1: 2.5em;
+    --fs-h2: 1.7em;
     --fs-h3: 1.2em;
     --fs-body: 1.15rem;
   }
@@ -65,7 +58,6 @@ html {
 }
 
 body {
-  background-color: var(--white);
   font-family: var(--ff-body);
   color: var(--dark);
   font-size: var(--fs-body);
@@ -102,15 +94,17 @@ h3 {
 
 h1 {
   font-size: var(--fs-h1);
-  color: var(--accent);
+  color: var(--dark);
 }
 
 h2 {
   font-size: var(--fs-h2);
+  color: var(--accent)
 }
 
 h3 {
   font-size: var(--fs-h3);
+  color: var(--medium)
 }
 
 .section__title {
@@ -127,13 +121,14 @@ h3 {
 
 a {
   font-size: inherit;
+  font-family: var(--ff-code);
   font-weight: var(--fw-bold);
   text-decoration: none;
-  color: var(--accent);
+  color: var(--dark);
 }
 
 a:hover {
-  color: var(--light);
+  color: var(--medium);
   text-decoration: underline;
 }
 
@@ -147,4 +142,34 @@ a:hover {
 
 .intro__text {
   padding: 2rem 0;
+}
+
+.spinner{
+  margin: 30px auto ;
+  width:20px;
+}
+
+
+#project-list {
+  display: grid;
+  column-gap: 10px;
+  row-gap: 10px;
+  justify-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  margin: 20px;
+}
+
+@media screen and (min-width: 600px) {
+  #project-list {
+  grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+@media screen and (min-width: 900px) {
+  #project-list {
+  grid-template-columns: 1fr 1fr 1fr;
+  }
+
 }

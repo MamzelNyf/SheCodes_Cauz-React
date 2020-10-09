@@ -8,7 +8,8 @@ function EventCard({eventData, ...props}) {
     <div className="event-card">
       <Link to={`/events/${eventData.slug}`}>
       <img src={eventData.image} alt="event"/>
-      <h3>{eventData.title}</h3>
+      <h2>{eventData.title}</h2>
+      <p>Created by{eventData.owner}</p>
       </Link>
     </div>
   );

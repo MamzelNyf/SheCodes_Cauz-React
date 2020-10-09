@@ -1,11 +1,15 @@
 .event-card {
-    width: 100%;
-    border: 1px solid black;
-    box-shadow: 0px 0px 5px gray;
+    border: 5px solid var(--white);
+    box-shadow: 1px 2px 5px rgba(0,0,0,0.2);
+    background-color: var(--white);
 }
 
 .event-card img {
     width: 100%;
     height: 300px;
     object-fit: cover;
+}
+
+.event-card a:hover{
+    text-decoration: none;
 }

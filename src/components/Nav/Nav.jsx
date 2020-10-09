@@ -8,29 +8,30 @@ import "./Nav.css"
 
 //internal components used in the main component Nav= cleaner  
 //Uses the props setUsername passed in Nav by App
-const LogoutButton = ({ setUsername }) => (
+const LogoutButton = ({ setUsername, setOpened }) => (
   <Link className={"navbar-link"} to="/"
     onClick={() => {
       localStorage.removeItem("token")
       localStorage.removeItem("username")
       setUsername(null)
+      setOpened(false)
     }}
   >
     Logout
   </Link>
 )
 
-const LoggedOutNav = () => {
+const LoggedOutNav = ({setOpened}) => {
 
   return (
-    <div>
-      <Link to="/login" className={"navbar-link"}>
+    <>
+      <Link to="/login" className={"navbar-link"} onClick={() => setOpened(false)}>
         Login
       </Link>
-      <Link to="/signup" className={"navbar-link"}>
+      <Link to="/signup" className={"navbar-link"} onClick={() => setOpened(false)}>
         Signup
       </Link>
-    </div>
+    </>
   )
 }
 
@@ -49,22 +50,23 @@ function Nav({ loggedIn, setUsername }) {
               alt="Cauz logo"
             />
           </a>
-          <button className="toggle" onClick={toggle}>
+          <div className="toggle" onClick={toggle}>
             {opened ? <ArrowUpCircle /> : <ArrowDownCircle />}
-          </button>
+          </div>
         </div>
         <div className={ `navbar-links ${opened ? `opened` : `closed`}`}>
           <Link to="/" className="navbar-link">Home</Link>
           {/* if loggedIn is true, pass the prop setUsername from App.js to the internal component*/}
           {loggedIn ? (
             <>
-              <LogoutButton setUsername={setUsername} />
-              <Link to="/events/" className="navbar-link">
+              
+              <Link to="/events/" className="navbar-link" onClick={() => setOpened(false)}>
                 Create a new Event
               </Link>
+              <LogoutButton setUsername={setUsername} setOpened={setOpened}/>
             </>
           ) : (
-              <LoggedOutNav setUsername={setUsername} />
+              <LoggedOutNav setUsername={setUsername} setOpened={setOpened}/>
           )}
       </div>
     </nav>

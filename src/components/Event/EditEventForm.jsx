@@ -116,7 +116,7 @@ function EditEventForm() {
     }
   }
   if (eventData.loading) {
-    return <ReactLoading type={"spinningBubbles"} color={"#CBCF06"} height={'20%'} width={'20%'} />
+    return <ReactLoading type={"spinningBubbles"} color={"#CBCF06"} className="spinner" />
   }
   return (
     <div>
@@ -152,14 +152,14 @@ function EditEventForm() {
           />
         </div>
         <div>
-          <label htmlFor="image">Picture for your event: </label>
-          <input
-            type="image"
-            id="goal"
-            onChange={handleChange}
-            value={eventData.image}
-            alt="Eventpicture"
-          />
+        <label htmlFor="image">Choose a picture online for your event: </label>
+        <input
+          type="text"
+          id="image"
+          placeholder="Enter the url of your image"
+          onChange={handleChange}
+          value={eventData.image}
+        />
         </div>
         <Dropdown
           title="Select a category"

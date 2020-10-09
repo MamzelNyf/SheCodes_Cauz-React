@@ -3,18 +3,32 @@
 .logo {
   width: 150px;
 }
-.Navbar {
+.navbar {
   display: flex;
   justify-content: space-between;
   flex-direction: column; 
-  background-color: white;
+  width: 100vw;
+  background-color: var(--white);
 }
+.navbar-home,
+.navbar-link {
+  display: flex;
+  align-items: center; 
+  padding: 30px; 
+  justify-content: center;
 
+}
+.navbar .opened{
+  height:100vh;
+}
 .navbar-links {
   display: flex;
   flex-direction: column;
 }
 
+.navbar-link {
+  border-bottom: 1px solid black;
+}
 .navbar-links.closed {
   display: none;
 }
@@ -23,59 +37,50 @@
   display: block;
 }
 
-.navbar-link {
-  border-bottom: none;
-}
+
 
 /**
 *
-* Smaller screen + Mobile
+* Larger screen
 *
 */
 @media screen and (min-width: 600px) {
-  .Navbar {
+  .navbar {
     flex-direction: row; 
     justify-content: space-between;
-    /* by default: align-items: strech -> child elements' heights = the container's height */
-  
-    height: 100vh; /* set a fixed height */
-    background-color: white;
+    padding-right:10px;
   }
-  
+  .navbar .opened{
+    height:200px;
+  }
   .navbar-links {
     flex-direction: row;
-
-    /* align-items: stretch; by default */
   }
-  
   .navbar-home,
   .navbar-link {
-    display: flex;
-    align-items: center; /* we want children to be centered vertically*/
-  
-    padding: 16px; /* with paddings on the sides */
+  flex-direction: row;
+  border-bottom: none;
+  padding: 10px; 
+  margin: 0 10px;
+
   }
-  
-  .navbar-home {
-    height: var(--height-lg-screens); /* it needs to stay inside the nav bar */
-    box-sizing: border-box;
+  a.navbar-link  {
+    border: var(--white) solid 1px;
   }
-  
-  .navbar-link {
-    border-bottom: 2px solid black;
+  a.navbar-link:hover {
+    text-decoration: none;
+    border: var(--medium) solid 1px;
   }
-  
-  .navbar-link:hover {
-    border-bottom-color: yellow;
-  }
-  
   .toggle {
     display: none;
     padding: 8px;
     font-size: 16px;
   }
   .navbar-links.closed {
-    display: initial;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
   }
   
 }
