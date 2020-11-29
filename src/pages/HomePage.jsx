@@ -24,10 +24,11 @@ function HomePage() {
     return <ReactLoading className="spinner" type={"spinningBubbles"} color={"#CBCF06"}  />
   }
 
-  // template 
   return (
     <div>
-      <h1>This is the HomePage</h1>
+      <h1>Welcome to Cauz</h1>
+      <p className="intro__text">Cauz is a nonprofit website with a mission to organise financial access in order to help funding NFP events through the direct support of others</p>
+      <h2>Find here the latest events available and pledge to your favorite:</h2>
       <div id="project-list">
         {eventList.map((eventData, key) => {
           return (

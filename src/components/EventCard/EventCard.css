@@ -12,4 +12,25 @@
 
 .event-card a:hover{
     text-decoration: none;
+    box-shadow: none;
+}
+
+.event-card:hover{
+    box-shadow: none;
+    border: none;
+}
+.event-card:hover h3{
+    padding-left :0.2em;
+    padding-right :0.2em;
+}
+.event-card h3{
+    min-height: 65px; 
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.event-card p{
+    margin:0.1em;
+    font-size: 0.9rem;
+   
 }

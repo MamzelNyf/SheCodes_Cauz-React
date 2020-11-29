@@ -73,11 +73,11 @@ function EventPage() {
     return (
       <div>
         <Link to={`/events/${slug}/edit`} className={"button"}>
-          Edit
+          Edit your event
         </Link>
         <Link className={"button"} to="/"
           onClick={deleteEvent}
-          >Delete Event
+          >Delete it
           </Link>
       </div>
     )
@@ -88,30 +88,34 @@ function EventPage() {
       {eventData.owner === owner ? 
       <EditOptions/>
       : null}
-      <p>Category {eventData.category}</p>
-      <img src={eventData.image} alt="event" />
-      <h3>Goal: $ {eventData.goal}</h3>
-      <h3>Created by {eventData.owner}</h3>
-      <h3>Event Date: {formatDate(eventData.date_created)}</h3>
-      <h3>Take place in {eventData.region}</h3>
-      <p>{eventData.description}</p>
-      {eventData.pledges.length !== 0 ? <h3>Pledges:</h3> : "" }
-
-      <ul>
-        {eventData.pledges.map((pledgeData) => {
-          return (
-            <div key={pledgeData.id}>
-              ${pledgeData.amount} from {pledgeData.supporter}
-              {pledgeData.supporter === owner ? <button onClick={() => { deletePledge(pledgeData.id) }}>Delete your Pledge</button> : null}
-            </div>
-          )
-        })}
-      </ul>
-      <p> Total: ${totalAmount} of pledges</p>
-      
-      {!token ? <p>Login to be able to pledge to this Event</p> : (eventData.owner !== owner ? <AddPledgeForm eventId={eventData.id}/> : null)}
-
-
+      <div className="content">
+        <div className="content__img">
+          <img src={eventData.image} alt="event" />
+          <p className="content__category">Category {eventData.category}</p>
+        </div>
+        <div className="content__text">
+          <p><strong>Goal:</strong> ${eventData.goal}</p>
+          <p>Organised by {eventData.owner}</p>
+          <p><strong>Event Date:</strong> {formatDate(eventData.date_created)}</p>
+          <p>Take place in {eventData.region}</p>
+          <p>{eventData.description}</p>
+          {eventData.pledges.length !== 0 ? <p><strong>Pledges:</strong></p> : "" }
+    
+          <ul>
+            {eventData.pledges.map((pledgeData) => {
+              return (
+                <div key={pledgeData.id}>
+                  ${pledgeData.amount} from {pledgeData.supporter}
+                  {pledgeData.supporter === owner ? <button onClick={() => { deletePledge(pledgeData.id) }}>Delete your Pledge</button> : null}
+                </div>
+              )
+            })}
+          </ul>
+          <p> <strong>Total pledges:</strong> ${totalAmount}</p>
+          
+          {!token ? <p><Link to="/login" className="button">Login</Link> to be able to pledge to this Event</p> : (eventData.owner !== owner ? <AddPledgeForm eventId={eventData.id}/> : null)}
+        </div>
+      </div>
     </div>
   )
 }

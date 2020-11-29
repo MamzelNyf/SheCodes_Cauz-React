@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column; 
-  width: 100vw;
+  /* width: 100vw; */
   background-color: var(--white);
 }
 .navbar-home,
@@ -82,5 +82,9 @@
     align-items: center;
 
   }
+  #menu a:hover {
+    background-color: white;
+    border-radius: 0.3rem;
+}
   
 }

@@ -8,6 +8,8 @@ import EditEventPage from "./pages/EditEventPage"
 import EventPage from "./pages/EventPage"
 import LoginPage from "./pages/LoginPage"
 import SignupPage from "./pages/SignupPage"
+import Footer from "./components/Footer/Footer"
+
 
 
 import "./App.css"
@@ -25,32 +27,34 @@ function App() {
     <Router>
       <div className={"App"}>
         {/* pass the loggedIn as a const and setUserName as a function usable in Nav */}
-        <Nav loggedIn={loggedIn} setUsername={setUsername} />
-        <h3>{loggedIn ? `Hello, ${username}` : "Please Log In"}</h3>
-        <Switch>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
-          <Route path="/events/:slug" exact>
-            <EventPage />
-          </Route>
-          <Route path="/events" exact>
-            <PostEventPage />
-          </Route>
-          <Route path="/events/:slug/edit" >
-            <EditEventPage />
-          </Route>
-          <Route path="/signup">
-          {loggedIn ? <Redirect to="/" /> :
-            <SignupPage  setUsername={setUsername} />
-          }
-          </Route>
-          <Route path="/login">
-          {loggedIn ? <Redirect to="/" /> :
-            <LoginPage setUsername={setUsername}/>
-          }
-          </Route>
-        </Switch>
+        <div className="main">
+          <Nav loggedIn={loggedIn} setUsername={setUsername} />
+          <Switch>
+            <Route path="/" exact>
+              <HomePage />
+            </Route>
+            <Route path="/events/:slug" exact>
+              <EventPage />
+            </Route>
+            <Route path="/events" exact>
+              <PostEventPage />
+            </Route>
+            <Route path="/events/:slug/edit" >
+              <EditEventPage />
+            </Route>
+            <Route path="/signup">
+            {loggedIn ? <Redirect to="/" /> :
+              <SignupPage  setUsername={setUsername} />
+            }
+            </Route>
+            <Route path="/login">
+            {loggedIn ? <Redirect to="/" /> :
+              <LoginPage setUsername={setUsername}/>
+            }
+            </Route>
+          </Switch>
+        </div>
+        <Footer/>
       </div>
     </Router>
   )
