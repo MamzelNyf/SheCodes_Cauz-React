@@ -46,7 +46,7 @@ function LoginForm({ setUsername }) {
       const data = await response.json()
       if (data.token !== undefined) {
         window.localStorage.setItem("token", data.token)
-        history.push("/")
+        history.goBack()
         return data.token
       } else {
         alert("wrong username/password")

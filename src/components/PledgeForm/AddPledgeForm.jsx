@@ -63,6 +63,7 @@ function AddPledgeForm ({eventId}){
               onChange={handleChange}
               value={pledgeValue.amount}
               onFocus = {(event) => event.target.value = ""} 
+              className="input"
             />     
         </div>       
         <button>Pledge it! </button>

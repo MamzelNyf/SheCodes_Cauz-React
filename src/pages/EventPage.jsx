@@ -95,27 +95,27 @@ function EventPage() {
           <p><strong>Goal:</strong> ${eventData.goal}</p>
           <p>Organised by {eventData.owner}</p>
           <p><strong>Event Date:</strong> {formatDate(eventData.date_created)}</p>
-          <p>Take place in {eventData.region}</p>
-          <p>{eventData.description}</p>
-          {eventData.pledges.length !== 0 ? <p><strong>Pledges:</strong></p> : "" }
-    
-          <ul>
-            {eventData.pledges.map((pledgeData) => {
-              return (
-                <div key={pledgeData.id}>
-                  ${pledgeData.amount} from {pledgeData.supporter}
-                  {pledgeData.supporter === owner ? <button onClick={() => { deletePledge(pledgeData.id) }}>Delete your Pledge</button> : null}
-                </div>
-              )
-            })}
-          </ul>
-          <p> <strong>Total pledges:</strong> ${totalAmount}</p>
-          
-          {!token ? <p><Link to="/login" className="button">Login</Link> to be able to pledge to this Event</p> : (eventData.owner !== owner ? <AddPledgeForm eventId={eventData.id}/> : null)}
-          {eventData.owner === owner ? <EditOptions/>: null}
+          <p><strong>Location:</strong> {eventData.region}</p>
+          <p><strong>Description: </strong>{eventData.description}</p>
         </div>
-      </div>
     </div>
+    <div className="form">
+    {eventData.pledges.length !== 0 ? <h2>Pledges:</h2> : "" }
+    
+    <ul>
+      {eventData.pledges.map((pledgeData) => {
+        return (
+          <div key={pledgeData.id}>
+            ${pledgeData.amount} from {pledgeData.supporter} {pledgeData.comment? `who said "${pledgeData.comment}"` : null}
+            {pledgeData.supporter === owner ? <button onClick={() => { deletePledge(pledgeData.id) }}>Delete your Pledge</button> : null}
+          </div>
+        )
+      })}
+    </ul>
+    <p> <strong>Total pledges:</strong> ${totalAmount}</p>
+    {!token ? <p><Link to="/login" className="button">Login</Link> <br/>to be able to pledge to this Event</p> : (eventData.owner !== owner ? <AddPledgeForm eventId={eventData.id}/> : null)}
+          {eventData.owner === owner ? <EditOptions/>: null}</div>
+      </div>
   )
 }
 

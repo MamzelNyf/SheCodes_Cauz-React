@@ -201,7 +201,7 @@ a:hover {
   background-color: white;
     width: 90vw;
     margin: 10vh auto;
-    padding: 5vh;
+    padding: 3vh 4vw;
     min-height: 40vh;
     box-shadow: 1px 2px 5px rgba(0,0,0,.2);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='%23ffe7e8' fill-opacity='0.45'%3E%3Cpolygon fill-rule='evenodd' points='8 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4'/%3E%3C/g%3E%3C/svg%3E");
@@ -224,14 +224,20 @@ a:hover {
   font-family: 'Courier New', Courier, monospace
 }
 
+ul {
+  padding: 0;
+}
 /* Date Picker */
 .react-date-picker__wrapper{
   border: var(--medium) solid 1px;
   min-width: 100%;
   border-radius: 3px;
+  background-color: white;
+  padding-left: 2px;
 }
 .react-date-picker{
   display: flex;
+  text-align: left;
 }
 .react-calendar__tile--active {
   background: var(--accent);
@@ -252,6 +258,7 @@ a:hover {
   display:flex;
   align-items: center;
   flex-direction:column;
+  padding-top: 20px;
 }
 .content img{
   object-fit: cover;
@@ -259,6 +266,7 @@ a:hover {
 .content__text{
   text-align:left;
   padding:20px;
+  background-color:white;
 }
 .content__category{
   position: absolute;
@@ -268,6 +276,8 @@ a:hover {
   padding: 5px;
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
+  font-family: var(--ff-code);
+  font-weight: bold;
 }
 .content__img{
   position:relative;
@@ -282,7 +292,7 @@ a:hover {
     border-top-right-radius:10px;
   }
   .content__img{
-    max-width:50%;
+    max-width:55%;
   }
   .content__category{
     position: absolute;
