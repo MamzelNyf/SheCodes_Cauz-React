@@ -115,11 +115,13 @@ function PostEventForm() {
 
 
   return (
-    <form onSubmit={handlePostEvent}>
+    <form onSubmit={handlePostEvent} className="form">
+    <h2>Post your event</h2>
+
     {hasError? <span>Has error: {JSON.stringify(hasError)}</span> : null }
       <div>
         {/* htmlFor is the React notation for used for accessibility */}
-        <label htmlFor="title">Title of your event: </label>
+        <label htmlFor="title" className="label">Title of your event: </label>
         <input
           type="text"
           id="title"
@@ -127,25 +129,28 @@ function PostEventForm() {
           onChange={handleChange}
           value={credentials.value}
           onFocus = {(event) => event.target.value = ""} 
+          className="input"
         />
       </div>
-      <label htmlFor="date">date of your event: </label>
+      <label htmlFor="date" className="label">Date of your event: </label>
       <DatePicker
         onChange={handleDate}
         value={credentials.date_created}
       />
       <div>
-        <label htmlFor="description">Description of your event: </label>
+        <label htmlFor="description" className="label">Description of your event: </label>
         <textarea
           id="description"
           placeholder="Enter description"
           onChange={handleChange}
           value={credentials.description}
           onFocus = {(event) => event.target.value = ""} 
+          className="input"
+          rows="10"
         />
       </div>
       <div>
-        <label htmlFor="goal">Goal you want to reach: </label>
+        <label htmlFor="goal" className="label">Goal you want to reach: </label>
         <input
           type="number"
           id="goal"
@@ -153,16 +158,18 @@ function PostEventForm() {
           onChange={handleChange}
           value={credentials.goal}
           onFocus = {(event) => event.target.value = ""} 
+          className="input"
         />
       </div>
       <div>
-        <label htmlFor="image">Choose a picture online for your event: </label>
+        <label htmlFor="image" className="label">Choose a picture online for your event: </label>
         <input
           type="text"
           id="image"
           placeholder="Enter the url of your image"
           onChange={handleChange}
           value={credentials.image}
+          className="input"
         />
         {/* <FileUploader 
           onFileSelectSuccess={(file) => setSelectedFile(file)}
@@ -170,12 +177,14 @@ function PostEventForm() {
           selectedFile={credentials.image}
         /> */}
       </div>
+      <label htmlFor="image" className="label">Choose a category: </label>
       <Dropdown
         title="Select a category"
         data={categories}
         handleDropDown={handleDropDownCategory}
         value={credentials.category} 
       />
+      <label htmlFor="image" className="label">Select your region: </label>
       <Dropdown
         title="Select a region"
         data={regions}
@@ -183,7 +192,7 @@ function PostEventForm() {
         value={credentials.region} 
       />
 
-      <button type="submit">Submit</button>
+      <button className="button" type="submit">Submit</button>
     </form>
   )
 }

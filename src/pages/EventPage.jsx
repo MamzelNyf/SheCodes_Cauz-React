@@ -85,9 +85,7 @@ function EventPage() {
   return (
     <div>
       <h1>{eventData.title}</h1>
-      {eventData.owner === owner ? 
-      <EditOptions/>
-      : null}
+      
       <div className="content">
         <div className="content__img">
           <img src={eventData.image} alt="event" />
@@ -114,6 +112,7 @@ function EventPage() {
           <p> <strong>Total pledges:</strong> ${totalAmount}</p>
           
           {!token ? <p><Link to="/login" className="button">Login</Link> to be able to pledge to this Event</p> : (eventData.owner !== owner ? <AddPledgeForm eventId={eventData.id}/> : null)}
+          {eventData.owner === owner ? <EditOptions/>: null}
         </div>
       </div>
     </div>

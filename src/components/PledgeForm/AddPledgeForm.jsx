@@ -36,7 +36,10 @@ function AddPledgeForm ({eventId}){
       const handlePostPledge = async (event) => {
         //prevent the default behavior of the form which is rerendering
         event.preventDefault()
-          await postData(token)
+        if( pledgeValue.amount <= 0)
+        {alert("Please enter a minimum amout of $1")}
+        else{await postData(token)}
+        
       }
       
       const handleChange = (event) => {

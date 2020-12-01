@@ -43,46 +43,51 @@ function SignupForm() {
   }
 
   return (
-    <form onSubmit={handleSignup}>
+    <form onSubmit={handleSignup} className="form">
+    <h2>Signup to create, manage or pledge to a post</h2>
       <div>
         {/* htmlFor is the React notation for used for accessibility */}
-        <label htmlFor="username">Username:</label>
+        <label htmlFor="username" className="label">Username:</label>
         <input
           type="text"
           id="username"
           placeholder="Enter a username"
           onChange={handleChange}
           value={credentials.username}
+          className="input"
         />
       </div>
       <div>
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="email" className="label">Email:</label>
         <input
           type="email"
           id="email"
           placeholder="Enter your email"
           onChange={handleChange}
           value={credentials.email}
+          className="input"
         />
       </div>
       <div>
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password" className="label">Password:</label>
         <input
           type="password"
           id="password"
           placeholder="Enter a password"
           onChange={handleChange}
           value={credentials.password}
+          className="input"
         />
       </div>
       <div>
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password" className="label">Repeat your Password:</label>
         <input
           type="password"
           id="checkPassword"
           placeholder="Please enter your password again"
           onChange={handleChange}
           value={credentials.checkPassword}
+          className="input"
         />
       </div>
       <button type="submit">Submit</button>

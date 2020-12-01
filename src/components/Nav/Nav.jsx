@@ -15,6 +15,7 @@ const LogoutButton = ({ setUsername, setOpened }) => (
       localStorage.removeItem("username")
       setUsername(null)
       setOpened(false)
+      alert("You have been logged out")
     }}
   >
     Logout

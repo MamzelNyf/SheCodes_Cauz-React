@@ -69,10 +69,11 @@ function LoginForm({ setUsername }) {
   }
 
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleLogin} className="form">
+    <h2>Login to create, manage or pledge to a post</h2>
       <div>
         {/* htmlFor is the React notation for used for accessibility */}
-        <label htmlFor="username">Username:</label>
+        <label htmlFor="username" className="label">Username:</label>
         <input
           type="text"
           id="username"
@@ -80,10 +81,11 @@ function LoginForm({ setUsername }) {
           onChange={handleChange}
           value={credentials.username}
           onFocus = {(event) => event.target.value = ""} 
+          className="input"
         />
       </div>
       <div>
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password" className="label">Password:</label>
         <input
           type="password"
           id="password"
@@ -91,6 +93,7 @@ function LoginForm({ setUsername }) {
           onChange={handleChange}
           value={credentials.password}
           onFocus = {(event) => event.target.value = ""} 
+          className="input"
         />
       </div>
       <button type="submit">Login</button>

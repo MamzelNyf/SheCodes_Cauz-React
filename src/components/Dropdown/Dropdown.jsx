@@ -12,6 +12,7 @@ function Dropdown({ title, data , handleDropDown, value}) {
   return (
   <div>
       <select
+        className="dropdown"
           onChange={onChange}
           value={value  ? value : dataValue}>
           <option value={title} disabled>{title} </option>

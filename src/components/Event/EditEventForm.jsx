@@ -96,7 +96,7 @@ function EditEventForm() {
     await putData(token)
   }
   if (eventData.loading) {
-    return 'Loading!'
+    return <ReactLoading type={"spinningBubbles"} color={"#CBCF06"} className="spinner" />
   }
 
    // Delete the event onClick
@@ -122,17 +122,21 @@ function EditEventForm() {
     <div>
     {username === eventData.owner ?
     <>
-    <form onSubmit={handlePutEvent}>
+    <form onSubmit={handlePutEvent} className="form">
+    <h2>Edit your Event</h2>
+
         {hasError ? <span>Has error: {JSON.stringify(hasError)}</span> : null}
         <div>
-          <label htmlFor="title">Title of your event: </label>
+          <label htmlFor="title" className="label">Title of your event: </label>
           <input
             type="text"
             id="title"
             onChange={handleChange}
             value={eventData.title}
+            className="input"
           />
         </div>
+        <label htmlFor="date" className="label">Update the Date of your event: </label>
         <DatePicker onChange={handleDate} value={eventData.date_created} />
         <div>
           <label htmlFor="description">Description of your event: </label>
@@ -140,33 +144,40 @@ function EditEventForm() {
             id="description"
             onChange={handleChange}
             value={eventData.description}
+            className="input"
+            rows="10"
+
           />
         </div>
         <div>
-          <label htmlFor="goal">Goal you want to reach: </label>
+          <label htmlFor="goal" className="label">Goal you want to reach: </label>
           <input
             type="number"
             id="goal"
             onChange={handleChange}
             value={eventData.goal}
+            className="input"
           />
         </div>
         <div>
-        <label htmlFor="image">Choose a picture online for your event: </label>
+        <label htmlFor="image" className="label">Choose a picture online for your event: </label>
         <input
           type="text"
           id="image"
           placeholder="Enter the url of your image"
           onChange={handleChange}
           value={eventData.image}
+          className="input"
         />
         </div>
+        <label htmlFor="image" className="label">Choose a category: </label>
         <Dropdown
           title="Select a category"
           data={categories}
           handleDropDown={handleDropDownCategory}
           value={eventData.category}
         />
+        <label htmlFor="image" className="label">Select your region: </label>
         <Dropdown
           title="Select a region"
           data={regions}
@@ -175,7 +186,7 @@ function EditEventForm() {
         />
         <button type="submit">Update</button>
       </form>
-      <Link className={"button"} to="/" onClick={deleteEvent} >Delete Event</Link>
+      <Link className={"button"} to="/" onClick={deleteEvent} >Delete your Event</Link>
     </>
     : <h2>You are not allowed to edit this event</h2>
     }

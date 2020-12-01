@@ -26,7 +26,7 @@
   --ff-body: 'Roboto', sans-serif;
   --ff-code: 'Philosopher', sans-serif;
   --fs-h1: 2rem;
-  --fs-h2: 1.5rem;
+  --fs-h2: 1.3rem;
   --fs-h3: 1.3rem;
   --fs-body: 1.05rem;
   /* box-shadow */
@@ -40,7 +40,7 @@
   :root {
     --fs-h1: 2.5em;
     --fs-h2: 1.5em;
-    --fs-h3: 1.3em;
+    --fs-h3: 1.2em;
     --fs-body: 1rem;
   }
 }
@@ -99,7 +99,7 @@ h3 {
 
 h1 {
   font-size: var(--fs-h1);
-  color: var(--dark);
+  color: var(--medium-text);
 }
 
 h2 {
@@ -165,7 +165,6 @@ a:hover {
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   margin: 20px;
-  padding: 0 8vw;
 }
 
 @media screen and (min-width: 600px) {
@@ -183,16 +182,69 @@ a:hover {
 }
 
 /* Form */
-.button{
-  padding:5px 10px;
-  border: 1px solid black;
-  border-radius: 50px;
-  margin:5px;
+.button, button{
+    padding: 5px 10px;
+    border: 2px solid var(--accent);
+    border-radius: 50px;
+    margin: 5px;
+    font-family: var(--ff-code);
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: white;
 }
-.button:hover{
+.button:hover, button:hover{
   background-color: var(--accent);
   color:black;
   text-decoration: none;
+}
+.form{
+  background-color: white;
+    width: 90vw;
+    margin: 10vh auto;
+    padding: 5vh;
+    min-height: 40vh;
+    box-shadow: 1px 2px 5px rgba(0,0,0,.2);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='%23ffe7e8' fill-opacity='0.45'%3E%3Cpolygon fill-rule='evenodd' points='8 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4'/%3E%3C/g%3E%3C/svg%3E");
+    border: white 20px solid;
+}
+.input,.label{
+    display: block;
+    text-align: left;
+    margin: 15px 0 15px;
+}
+.label{
+  margin: 15px 0 0 ;
+}
+.input, .dropdown{
+  padding: 5px;
+  min-width: 100%;
+  border: var(--medium) solid 1px;
+  border-radius: 3px;
+  margin:0 0 15px;
+  font-family: 'Courier New', Courier, monospace
+}
+
+/* Date Picker */
+.react-date-picker__wrapper{
+  border: var(--medium) solid 1px;
+  min-width: 100%;
+  border-radius: 3px;
+}
+.react-date-picker{
+  display: flex;
+}
+.react-calendar__tile--active {
+  background: var(--accent);
+}
+.react-calendar__tile--now {
+  background: var(--light);
+}
+.react-calendar__month-view__days__day--weekend {
+  color: var(--medium-text)
+}
+.react-date-picker input{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
 }
 
 /* Event */
@@ -240,5 +292,12 @@ a:hover {
     padding: 5px;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
+  }
+  .form{
+      width: 40vw;
+      
+  }
+  #project-list {
+    padding: 0 8vw;
   }
 }
